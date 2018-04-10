@@ -1,4 +1,4 @@
-let MyData = [
+[
   {
     "id": 1,
     "firstName": "Jan",
@@ -48,22 +48,3 @@ let MyData = [
     "note": 8
   }
 ]
-
-
-
-//var mydata = JSON.parse(data);
-console.log(MyData)
-let names = MyData.map(name => console.log(name.firstName))
-
-/*
-
-not sure if I am able to access the data from additional fila data.json, might be possible with local server and using ajax
-read more about this
-
-$.ajax({
-  dataType: "json",
-  url: url,
-  data: data,
-  success: success
-});
-*/
