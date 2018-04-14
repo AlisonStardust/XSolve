@@ -9,12 +9,23 @@
     <link rel="stylesheet" href="style.css" type="text/css">
   </head>
   <body>
-    <button class="sort-ID">sort ID</button>
-    <button class="sort-firstName">sort First Name</button>
-    <button class="sort-lastName">sort Last Name</button>
-    <button class="sort-DateOFBirth">sort Date Of Birth</button>
-    <button class="sort-Company">sort Company</button>
-    <button class="sort-Note">sort Note</button>
+  <div class="content">
+    <div>
+    <input type="text" class="filter filter-ID" placeholder="ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ID'">
+    <input type="text" class="filter filter-firstName" placeholder="first Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'first Name'">
+    <input type="text" class="filter filter-lastName" placeholder="last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'last Name'">
+    <input type="text" class="filter filter-DateOFBirth" placeholder="date of birth" onfocus="this.placeholder = ''" onblur="this.placeholder = 'date of birth'">
+    <input type="text" class="filter filter-Company" placeholder="company" onfocus="this.placeholder = ''" onblur="this.placeholder = 'company'">
+    <input type="text" class="filter filter-Note" placeholder="note" onfocus="this.placeholder = ''" onblur="this.placeholder = 'note'">
+    </div>
+    <div>
+    <button class="sort sort-ID">sort ID</button>
+    <button class="sort sort-firstName">sort First Name</button>
+    <button class="sort sort-lastName">sort Last Name</button>
+    <button class="sort sort-DateOFBirth">sort Date Of Birth</button>
+    <button class="sort sort-Company">sort Company</button>
+    <button class="sort sort-Note">sort Note</button>
+    </div>
 <!--    <table class="table">
       <tr>
       <thead>
@@ -72,7 +83,8 @@
 -->
     <div class="table">
     </div>
-    <script type="text/javascript" src="data.json"></script>
+  </div>
+  <script type="text/javascript" src="data.json"></script>
   <script src="script.js"></script>
   </body>
 

@@ -51,6 +51,21 @@ let myData = [
 
 const tableWebsite = document.querySelector('.table');
 
+const inputs = document.querySelectorAll('.filter');
+console.log(inputs)
+const buttons = document.querySelectorAll('.sort');
+console.log(buttons)
+
+const buttonID = document.querySelector('.sort-ID');
+const buttonFirstName = document.querySelector('.sort-firstName');
+const buttonLastName = document.querySelector('.sort-lastName');
+const buttonDateOfBirth = document.querySelector('.sort-DateOFBirth');
+const buttonCompany = document.querySelector('.sort-Company');
+const buttonNote = document.querySelector('.sort-Note');
+
+//innitialy I wanted to hardcode table in the HTML however I think printing it is a better solution - I had to google how to print that and I need to admit that
+
+function printTable() {
 let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>DoB</th><th>Company</th><th>Note</th></tr></thead>`;
   table += '<tbody>';
   for (var i in myData) {
@@ -62,10 +77,74 @@ let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><
     <td>${myData[i].company}</td>
     <td>${myData[i].note}</td>
     </tr>`;
+  }
+//innerHTML is the devil of devils, however right now it is the only solution I can come up with, innerText will not work and is much safer
+tableWebsite.innerHTML = table;
 }
 
-//innerHTML is the devil of devils, however right now it is the best solution I can come up with
-tableWebsite.innerHTML = table;
+printTable();
+
+//sorting functionality needs improvment because of the code repetition, however I don't know how to pass values in function for each button
+
+buttonID.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.id > b.id;
+  });
+  printTable();
+});
+
+buttonFirstName.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.firstName > b.firstName;
+  });
+  printTable();
+});
+
+buttonLastName.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.lastName > b.lastName;
+  });
+  printTable();
+});
+
+buttonDateOfBirth.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.dateOfBirth > b.dateOfBirth;
+  });
+  printTable();
+});
+
+buttonCompany.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.company > b.company;
+  });
+  printTable();
+});
+
+buttonNote.addEventListener("click", function() {
+  myData.sort(function (a,b) {
+    return a.note > b.note;
+  });
+  printTable();
+});
+
+//filter
+
+let nachwile = [];
+
+inputs[0].onkeyup = function sprawdzic() {
+  nachwile.push(inputs[0].value);
+  dupa();
+}
+
+function dupa () {
+  if (nachwile.indexOf('a') === 0) {
+    alert('ass')
+  }
+}
+
+//pagination
+
 
 
 // const first = document.querySelectorAll('.first td');
@@ -100,40 +179,12 @@ tableWebsite.innerHTML = table;
 //   return character.note;
 // });
 
-// //sorting function
-// button.addEventListener("click", myFunction);
-
-// function myFunction (){
-//   ids.sort();
-//   // firstNames.sort();
-//   // lastNames.sort();
-//   // datesOfBirth.sort();
-//   // companies.sort();
-//   // notes.sort();
-//   // console.log(ids, firstNames)
-//    print()
-// }
-
-// function print() {
-//   for (i=0; i < ; i++) {
-//     first[i].innerText = ids[i];
-//     second[i].innerText = firstNames[i];
-//     third[i].innerText = lastNames[i];
-//     fourth[i].innerText = datesOfBirth[i];
-//     fifth[i].innerText = companies[i];
-//     sixth[i].innerText = notes[i];
-//   }
-// }
-
-// print()
-// /*
 
 // not sure if I am able to access the data from additional fila data.json, might be possible with local server and using ajax
-// read more about this
 
 // $.ajax({
 //   dataType: "json",
-//   url: url,
+//   url: 'data.json',
 //   data: data,
 //   success: success
 // });

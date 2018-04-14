@@ -4,10 +4,24 @@
 }
 
 .table {
-
+  background-color: #9FA8DA;
+  padding: 50px;
 }
 
-.table {
-  background-color: blue;
+.table > thead {
+  padding: 50px;
+}
 
+.content {
+  margin: 200px;
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter {
+  width: 60px;
+  margin: 5px;
 }
