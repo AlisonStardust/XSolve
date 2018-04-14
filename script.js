@@ -49,21 +49,12 @@ let myData = [
   }
 ]
 
+//selectiong all DOM elements
 const tableWebsite = document.querySelector('.table');
-
 const inputs = document.querySelectorAll('.filter');
-console.log(inputs)
 const buttons = document.querySelectorAll('.sort');
-console.log(buttons)
 
-const buttonID = document.querySelector('.sort-ID');
-const buttonFirstName = document.querySelector('.sort-firstName');
-const buttonLastName = document.querySelector('.sort-lastName');
-const buttonDateOfBirth = document.querySelector('.sort-DateOFBirth');
-const buttonCompany = document.querySelector('.sort-Company');
-const buttonNote = document.querySelector('.sort-Note');
-
-//innitialy I wanted to hardcode table in the HTML however I think printing it is a better solution - I had to google how to print that and I need to admit that
+//initially I wanted to hardcode table in the HTML however I think printing it is a better solution - I had to google how to print that and I need to admit that
 
 function printTable() {
 let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>DoB</th><th>Company</th><th>Note</th></tr></thead>`;
@@ -86,98 +77,114 @@ printTable();
 
 //sorting functionality needs improvment because of the code repetition, however I don't know how to pass values in function for each button
 
-buttonID.addEventListener("click", function() {
+buttons[0].addEventListener("click", function(){
   myData.sort(function (a,b) {
     return a.id > b.id;
   });
   printTable();
 });
 
-buttonFirstName.addEventListener("click", function() {
+buttons[1].addEventListener("click", function() {
   myData.sort(function (a,b) {
     return a.firstName > b.firstName;
   });
   printTable();
 });
 
-buttonLastName.addEventListener("click", function() {
+buttons[2].addEventListener("click", function() {
   myData.sort(function (a,b) {
     return a.lastName > b.lastName;
   });
   printTable();
 });
 
-buttonDateOfBirth.addEventListener("click", function() {
+buttons[3].addEventListener("click", function() {
   myData.sort(function (a,b) {
     return a.dateOfBirth > b.dateOfBirth;
   });
   printTable();
 });
 
-buttonCompany.addEventListener("click", function() {
+buttons[4].addEventListener("click", function() {
   myData.sort(function (a,b) {
     return a.company > b.company;
   });
   printTable();
 });
 
-buttonNote.addEventListener("click", function() {
+buttons[5].addEventListener("click", function() {
   myData.sort(function (a,b) {
     return a.note > b.note;
   });
   printTable();
 });
 
-//filter
+//filter functionality
+let allTableElementsTd = document.getElementsByTagName("td");
+let allTableElementsTr = document.getElementsByTagName("tr");
+console.log(allTableElementsTr)
 
-let nachwile = [];
-
-inputs[0].onkeyup = function sprawdzic() {
-  nachwile.push(inputs[0].value);
-  dupa();
+inputs[1].onkeyup = function checkElementLetters() {
+  let firstLetter = inputs[1].value.toLowerCase();
+  myData.forEach(function(character) {
+    console.log(character.firstName)
+  })
+  //console.log(allTableElementsTd[1].innerHTML, firstLetter);
+  // if (allTableElementsTd[1].innerHTML.includes(firstLetter) || allTableElementsTd[7].innerHTML.includes(firstLetter)
+  //   || allTableElementsTd[13].innerHTML.includes(firstLetter) || allTableElementsTd[19].innerHTML.includes(firstLetter)
+  //   || allTableElementsTd[25].innerHTML.includes(firstLetter) || allTableElementsTd[31].innerHTML.includes(firstLetter)
+  //   || allTableElementsTd[37].innerHTML.includes(firstLetter)) {
+  //   alert('dupa');
+  // }
 }
 
-function dupa () {
-  if (nachwile.indexOf('a') === 0) {
-    alert('ass')
+inputs[2].onkeyup = function checkElementLetters() {
+  checkLetters(2);
+}
+
+inputs[4].onkeyup = function checkElementLetters() {
+  checkLetters(4);
+}
+
+function checkLetters(i) {
+  let letter = inputs[i].value.toLowerCase();
+  console.log(letter);
+  if (letter.indexOf('a') !== 0) {
+    allTableElementsTd[0].style.display = "none";
+    allTableElementsTd[1].style.display = "none";
+    allTableElementsTd[2].style.display = "none";
+    allTableElementsTd[3].style.display = "none";
+    allTableElementsTd[4].style.display = "none";
+    allTableElementsTd[5].style.display = "none";
+  }
+}
+
+inputs[0].onkeyup = function checkElementLetters() {
+  checkNumbers(0);
+}
+
+inputs[3].onkeyup = function checkElementLetters() {
+  checkNumbers(3);
+}
+
+inputs[5].onkeyup = function checkElementLetters() {
+  checkNumbers(5);
+}
+
+function checkNumbers(i) {
+  let numerValue = inputs[i].value;
+  console.log(allTableElementsTr[1].value.innerHTML)
+  if (allTableElementsTr[1].value.innerHTML.includes(numerValue)) {
+    allTableElementsTd[0].style.display = "none";
+    allTableElementsTd[1].style.display = "none";
+    allTableElementsTd[2].style.display = "none";
+    allTableElementsTd[3].style.display = "none";
+    allTableElementsTd[4].style.display = "none";
+    allTableElementsTd[5].style.display = "none";
   }
 }
 
 //pagination
-
-
-
-// const first = document.querySelectorAll('.first td');
-// const second = document.querySelectorAll('.second td');
-// const third = document.querySelectorAll('.third td');
-// const fourth = document.querySelectorAll('.fourth td');
-// const fifth = document.querySelectorAll('.fifth td');
-// const sixth = document.querySelectorAll('.sixth td');
-// const button = document.querySelector('.sort-ID');
-
-// let ids = MyData.map(function(character) {
-//   return character.id;
-// });
-
-// let firstNames = MyData.map(function(character) {
-//   return character.firstName;
-// });
-
-// let lastNames = MyData.map(function(character) {
-//   return character.lastName;
-// });
-
-// let datesOfBirth = MyData.map(function(character) {
-//   return character.dateOfBirth;
-// });
-
-// let companies = MyData.map(function(character) {
-//   return character.company;
-// });
-
-// let notes = MyData.map(function(character) {
-//   return character.note;
-// });
 
 
 // not sure if I am able to access the data from additional fila data.json, might be possible with local server and using ajax
