@@ -54,8 +54,8 @@ const tableWebsite = document.querySelector('.table');
 const inputs = document.querySelectorAll('.filter');
 const buttons = document.querySelectorAll('.sort');
 
-//initially I wanted to hardcode table in the HTML however I think printing it is a better solution - I had to google how to print that and I need to admit that
-
+//initially I wanted to hardcode table in the HTML however I think printing it is a better solution
+//I had to google how to print table from json
 function printTable() {
 let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>DoB</th><th>Company</th><th>Note</th></tr></thead>`;
   table += '<tbody>';
@@ -69,14 +69,15 @@ let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><
     <td>${myData[i].note}</td>
     </tr>`;
   }
-//innerHTML is the devil of devils, however right now it is the only solution I can come up with, innerText will not work and is much safer
+//innerHTML is the devil of devils, however right now it is the only solution I can come up with,
+//innerText is much safer but will not work in this case
 tableWebsite.innerHTML = table;
 }
 
 printTable();
 
-//sorting functionality needs improvment because of the code repetition, however I don't know how to pass values in function for each button
-
+//sorting functionality needs improvment because of the code repetition
+//however I don't know how to pass values in sort() function for each button
 buttons[0].addEventListener("click", function(){
   myData.sort(function (a,b) {
     return a.id > b.id;
@@ -120,68 +121,81 @@ buttons[5].addEventListener("click", function() {
 });
 
 //filter functionality
-let allTableElementsTd = document.getElementsByTagName("td");
-let allTableElementsTr = document.getElementsByTagName("tr");
-console.log(allTableElementsTr)
+// let allTableElementsTd = document.getElementsByTagName("td");
+// let allTableElementsTr = document.getElementsByTagName("tr");
 
+//functions fired at inputs that include letters
 inputs[1].onkeyup = function checkElementLetters() {
-  let firstLetter = inputs[1].value.toLowerCase();
+  let firstNameInput = inputs[1].value.toLowerCase();
   myData.forEach(function(character) {
-    console.log(character.firstName)
+    console.log(character.firstName.toLowerCase(), firstNameInput)
+    if (character.firstName.toLowerCase().includes(firstNameInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
   })
-  //console.log(allTableElementsTd[1].innerHTML, firstLetter);
-  // if (allTableElementsTd[1].innerHTML.includes(firstLetter) || allTableElementsTd[7].innerHTML.includes(firstLetter)
-  //   || allTableElementsTd[13].innerHTML.includes(firstLetter) || allTableElementsTd[19].innerHTML.includes(firstLetter)
-  //   || allTableElementsTd[25].innerHTML.includes(firstLetter) || allTableElementsTd[31].innerHTML.includes(firstLetter)
-  //   || allTableElementsTd[37].innerHTML.includes(firstLetter)) {
-  //   alert('dupa');
-  // }
 }
 
 inputs[2].onkeyup = function checkElementLetters() {
-  checkLetters(2);
+  let lastNameInput = inputs[2].value.toLowerCase();
+  myData.forEach(function(character) {
+    console.log(character.lastName, lastNameInput)
+    if (character.lastName.toLowerCase().includes(lastNameInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
+  })
 }
 
 inputs[4].onkeyup = function checkElementLetters() {
-  checkLetters(4);
+  let companyInput = inputs[4].value.toLowerCase();
+  myData.forEach(function(character) {
+    console.log(character.company, companyInput)
+    if (character.company.toLowerCase().includes(companyInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
+  })
 }
 
-function checkLetters(i) {
-  let letter = inputs[i].value.toLowerCase();
-  console.log(letter);
-  if (letter.indexOf('a') !== 0) {
-    allTableElementsTd[0].style.display = "none";
-    allTableElementsTd[1].style.display = "none";
-    allTableElementsTd[2].style.display = "none";
-    allTableElementsTd[3].style.display = "none";
-    allTableElementsTd[4].style.display = "none";
-    allTableElementsTd[5].style.display = "none";
-  }
-}
-
+//functions fired at inputs that include numbers
 inputs[0].onkeyup = function checkElementLetters() {
-  checkNumbers(0);
+  let idInput = inputs[0].value;
+  myData.forEach(function(character) {
+    console.log(character.id, idInput)
+    if (character.id.includes(idInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
+  })
 }
 
 inputs[3].onkeyup = function checkElementLetters() {
-  checkNumbers(3);
+  let DOBInput = inputs[0].value;
+  myData.forEach(function(character) {
+    console.log(character.dateOfBirth, DOBInput)
+    if (character.dateOfBirth.includes(DOBInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
+  })
 }
 
 inputs[5].onkeyup = function checkElementLetters() {
-  checkNumbers(5);
-}
-
-function checkNumbers(i) {
-  let numerValue = inputs[i].value;
-  console.log(allTableElementsTr[1].value.innerHTML)
-  if (allTableElementsTr[1].value.innerHTML.includes(numerValue)) {
-    allTableElementsTd[0].style.display = "none";
-    allTableElementsTd[1].style.display = "none";
-    allTableElementsTd[2].style.display = "none";
-    allTableElementsTd[3].style.display = "none";
-    allTableElementsTd[4].style.display = "none";
-    allTableElementsTd[5].style.display = "none";
-  }
+  let noteInput = inputs[0].value;
+  myData.forEach(function(character) {
+    console.log(character.note, noteInput)
+    if (character.note.includes(noteInput)) {
+      console.log("tak")
+    } else {
+      console.log('nope')
+    }
+  })
 }
 
 //pagination
