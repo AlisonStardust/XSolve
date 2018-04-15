@@ -6,6 +6,7 @@
 .table {
   background-color: #9FA8DA;
   padding: 50px;
+  width: 420px;
 }
 
 .table > thead {
