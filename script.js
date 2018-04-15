@@ -135,8 +135,8 @@ inputs[4].onkeyup = function checkElementLetters() {
 
 //id functionality does not work
 inputs[0].onkeyup = function checkElementLetters() {
-  let idInput = inputs[1].value;
-  let newTable = myData.filter((character) => character.id === idInput);
+  let idInput = inputs[0].value;
+  let newTable = myData.filter((character) => character.id == idInput);
   printTable(newTable);
 }
 
@@ -148,7 +148,7 @@ inputs[3].onkeyup = function checkElementLetters() {
 
 inputs[5].onkeyup = function checkElementLetters() {
   let noteInput = inputs[5].value;
-  let newTable = myData.filter((character) => character.note.includes(DOBInput));
+  let newTable = myData.filter((character) => character.note == noteInput);
   printTable(newTable);
 }
 
