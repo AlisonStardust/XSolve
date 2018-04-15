@@ -113,12 +113,8 @@ buttons[5].addEventListener("click", function() {
   printTable(myData);
 });
 
-//filter functionality
+//filter functionality also needs improvment because of the code repetition
 
-// let allTableElementsTd = document.getElementsByTagName("td");
-// let allTableElementsTr = document.getElementsByTagName("tr");
-
-//functions fired at inputs that include letters
 inputs[1].onkeyup = function checkElementLetters() {
   let firstNameInput = inputs[1].value.toLowerCase();
   let newTable = myData.filter((character) => character.firstName.toLowerCase().includes(firstNameInput));
@@ -137,7 +133,6 @@ inputs[4].onkeyup = function checkElementLetters() {
   printTable(newTable);
 }
 
-//functions fired at inputs that include numbers
 //id functionality does not work
 inputs[0].onkeyup = function checkElementLetters() {
   let idInput = inputs[1].value;
@@ -157,7 +152,7 @@ inputs[5].onkeyup = function checkElementLetters() {
   printTable(newTable);
 }
 
-//pagination - unfortunatelly at this moment I do not know who to do pagination.
+//pagination - unfortunatelly at this moment I do not know how to do pagination.
 
 
 /* Additional comments:
@@ -168,6 +163,10 @@ That's why I copied json file to script.js and used it here - otherwise I would 
 I know it is not save to include sensitive data (ex. employees data) in public script, however
 I was unable to go pass the accessing the data.json file.
 
+2. There is a lot of code repetition and I try to avoid that at all costs, however
+in this task it was very confusing for me how to decrease repetition (especially when it comes to values in objects).
+
+3. I didn't finish all the required tasks and I am aware of that.
 
 $.ajax({
   dataType: "json",
