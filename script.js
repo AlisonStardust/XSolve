@@ -50,23 +50,25 @@ let myData = [
 ]
 
 //selectiong all DOM elements
+//I tend to make global variables when it comes to "catching" DOM elements
+//not sure if it's fine or should I change my habit regarding that
 const tableWebsite = document.querySelector('.table');
 const inputs = document.querySelectorAll('.filter');
 const buttons = document.querySelectorAll('.sort');
 
 //initially I wanted to hardcode table in the HTML however I think printing it is a better solution
 //I had to google how to print table from json
-function printTable() {
+function printTable(tableToPrint) {
 let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>DoB</th><th>Company</th><th>Note</th></tr></thead>`;
   table += '<tbody>';
-  for (var i in myData) {
+  for (var i in tableToPrint) {
     table += `<tr>
-    <td>${myData[i].id}</td>
-    <td>${myData[i].firstName}</td>
-    <td>${myData[i].lastName}</td>
-    <td>${myData[i].dateOfBirth}</td>
-    <td>${myData[i].company}</td>
-    <td>${myData[i].note}</td>
+    <td>${tableToPrint[i].id}</td>
+    <td>${tableToPrint[i].firstName}</td>
+    <td>${tableToPrint[i].lastName}</td>
+    <td>${tableToPrint[i].dateOfBirth}</td>
+    <td>${tableToPrint[i].company}</td>
+    <td>${tableToPrint[i].note}</td>
     </tr>`;
   }
 //innerHTML is the devil of devils, however right now it is the only solution I can come up with,
@@ -74,40 +76,41 @@ let table = `<table><thead><tr><th>ID</th><th>First Name</th><th>Last Name</th><
 tableWebsite.innerHTML = table;
 }
 
-printTable();
+printTable(myData);
 
 //sorting functionality needs improvment because of the code repetition
-//however I don't know how to pass values in sort() function for each button
+//however I am not sure how to pass myData values in sort() function for each button
 
 buttons[0].addEventListener("click", function(){
   myData.sort((a,b) => a.id > b.id);
-  printTable();
+  printTable(myData);
 });
 
 buttons[1].addEventListener("click", function() {
   myData.sort((a,b) => a.firstName > b.firstName);
-  printTable();
+  printTable(myData);
 });
 
 buttons[2].addEventListener("click", function() {
   myData.sort((a,b) => a.lastName > b.lastName);
-  printTable();
+  printTable(myData);
 });
 
+//functionality for dateOfBirth does not work
 buttons[3].addEventListener("click", function() {
   console.log(myData.forEach(x => x.dateOfBirth.split("")))
   myData.sort((a,b) => a.dateOfBirth > b.dateOfBirth);
-  printTable();
+  printTable(myData);
 });
 
 buttons[4].addEventListener("click", function() {
   myData.sort((a,b) => a.company > b.company);
-  printTable();
+  printTable(myData);
 });
 
 buttons[5].addEventListener("click", function() {
   myData.sort((a,b) => a.note > b.note);
-  printTable();
+  printTable(myData);
 });
 
 //filter functionality
@@ -118,100 +121,60 @@ buttons[5].addEventListener("click", function() {
 //functions fired at inputs that include letters
 inputs[1].onkeyup = function checkElementLetters() {
   let firstNameInput = inputs[1].value.toLowerCase();
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.firstName.toLowerCase().includes(firstNameInput)) {
-      console.log(`${index} ${character.firstName} contains the letter from input`)
-    } else {
-      console.log(`${index} ${character.firstName} does not contain the letter from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let newTable = myData.filter((character) => character.firstName.toLowerCase().includes(firstNameInput));
+  printTable(newTable);
 }
 
 inputs[2].onkeyup = function checkElementLetters() {
   let lastNameInput = inputs[2].value.toLowerCase();
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.lastName.toLowerCase().includes(lastNameInput)) {
-      console.log(`${index} ${character.lastName} contains the letter from input`)
-    } else {
-      console.log(`${index} ${character.lastName} does not contain the letter from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let newTable = myData.filter((character) => character.lastName.toLowerCase().includes(lastNameInput));
+  printTable(newTable);
 }
 
 inputs[4].onkeyup = function checkElementLetters() {
   let companyInput = inputs[4].value.toLowerCase();
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.company.toLowerCase().includes(companyInput)) {
-      console.log(`${index} ${character.company} contains the letter from input`)
-    } else {
-      console.log(`${index} ${character.company} does not contain the letter from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let newTable = myData.filter((character) => character.company.toLowerCase().includes(companyInput));
+  printTable(newTable);
 }
 
 //functions fired at inputs that include numbers
+//id functionality does not work
 inputs[0].onkeyup = function checkElementLetters() {
-  let idInput = inputs[0].value;
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.id == idInput) {
-      console.log(`${index} ${character.id} contains the number from input`)
-    } else {
-      console.log(`${index} ${character.id} does not contain the number from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let idInput = inputs[1].value;
+  let newTable = myData.filter((character) => character.id === idInput);
+  printTable(newTable);
 }
 
 inputs[3].onkeyup = function checkElementLetters() {
   let DOBInput = inputs[3].value;
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.dateOfBirth.includes(DOBInput)) {
-      console.log(`${index} ${character.dateOfBirth} contains the number from input`)
-    } else {
-      console.log(`${index} ${character.dateOfBirth} does not contain the number from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let newTable = myData.filter((character) => character.dateOfBirth.includes(DOBInput));
+  printTable(newTable);
 }
 
 inputs[5].onkeyup = function checkElementLetters() {
   let noteInput = inputs[5].value;
-  myData.forEach(function(character) {
-    let index = myData.indexOf(character);
-    if (character.note.includes(noteInput)) {
-      console.log(`${index} ${character.note} contains the number from input`)
-    } else {
-      console.log(`${index} ${character.note} does not contain the number from input`);
-      myData.splice(index, 1);
-    }
-  });
-  printTable();
+  let newTable = myData.filter((character) => character.note.includes(DOBInput));
+  printTable(newTable);
 }
 
-//pagination
+//pagination - unfortunatelly at this moment I do not know who to do pagination.
 
 
-// not sure if I am able to access the data from additional fila data.json, might be possible with local server and using ajax
+/* Additional comments:
 
-// $.ajax({
-//   dataType: "json",
-//   url: 'data.json',
-//   data: data,
-//   success: success
-// });
-// //var mydata = JSON.parse(data);
-// //console.log(MyData)
-// */
+1. I was not sure if I am able to access the data from additional fila data.json.
+I think it might be possible with local server or using ajax.
+That's why I copied json file to script.js and used it here - otherwise I would be unable to access data.
+I know it is not save to include sensitive data (ex. employees data) in public script, however
+I was unable to go pass the accessing the data.json file.
+
+
+$.ajax({
+  dataType: "json",
+  url: 'data.json',
+  data: data,
+  success: success
+});
+var mydata = JSON.parse(data);
+console.log(MyData)
+*/
