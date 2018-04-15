@@ -78,49 +78,40 @@ printTable();
 
 //sorting functionality needs improvment because of the code repetition
 //however I don't know how to pass values in sort() function for each button
+
 buttons[0].addEventListener("click", function(){
-  myData.sort(function (a,b) {
-    return a.id > b.id;
-  });
+  myData.sort((a,b) => a.id > b.id);
   printTable();
 });
 
 buttons[1].addEventListener("click", function() {
-  myData.sort(function (a,b) {
-    return a.firstName > b.firstName;
-  });
+  myData.sort((a,b) => a.firstName > b.firstName);
   printTable();
 });
 
 buttons[2].addEventListener("click", function() {
-  myData.sort(function (a,b) {
-    return a.lastName > b.lastName;
-  });
+  myData.sort((a,b) => a.lastName > b.lastName);
   printTable();
 });
 
 buttons[3].addEventListener("click", function() {
-  myData.sort(function (a,b) {
-    return a.dateOfBirth > b.dateOfBirth;
-  });
+  console.log(myData.forEach(x => x.dateOfBirth.split("")))
+  myData.sort((a,b) => a.dateOfBirth > b.dateOfBirth);
   printTable();
 });
 
 buttons[4].addEventListener("click", function() {
-  myData.sort(function (a,b) {
-    return a.company > b.company;
-  });
+  myData.sort((a,b) => a.company > b.company);
   printTable();
 });
 
 buttons[5].addEventListener("click", function() {
-  myData.sort(function (a,b) {
-    return a.note > b.note;
-  });
+  myData.sort((a,b) => a.note > b.note);
   printTable();
 });
 
 //filter functionality
+
 // let allTableElementsTd = document.getElementsByTagName("td");
 // let allTableElementsTr = document.getElementsByTagName("tr");
 
@@ -128,74 +119,86 @@ buttons[5].addEventListener("click", function() {
 inputs[1].onkeyup = function checkElementLetters() {
   let firstNameInput = inputs[1].value.toLowerCase();
   myData.forEach(function(character) {
-    console.log(character.firstName.toLowerCase(), firstNameInput)
+    let index = myData.indexOf(character);
     if (character.firstName.toLowerCase().includes(firstNameInput)) {
-      console.log("tak")
+      console.log(`${index} ${character.firstName} contains the letter from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.firstName} does not contain the letter from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 inputs[2].onkeyup = function checkElementLetters() {
   let lastNameInput = inputs[2].value.toLowerCase();
   myData.forEach(function(character) {
-    console.log(character.lastName, lastNameInput)
+    let index = myData.indexOf(character);
     if (character.lastName.toLowerCase().includes(lastNameInput)) {
-      console.log("tak")
+      console.log(`${index} ${character.lastName} contains the letter from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.lastName} does not contain the letter from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 inputs[4].onkeyup = function checkElementLetters() {
   let companyInput = inputs[4].value.toLowerCase();
   myData.forEach(function(character) {
-    console.log(character.company, companyInput)
+    let index = myData.indexOf(character);
     if (character.company.toLowerCase().includes(companyInput)) {
-      console.log("tak")
+      console.log(`${index} ${character.company} contains the letter from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.company} does not contain the letter from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 //functions fired at inputs that include numbers
 inputs[0].onkeyup = function checkElementLetters() {
   let idInput = inputs[0].value;
   myData.forEach(function(character) {
-    console.log(character.id, idInput)
-    if (character.id.includes(idInput)) {
-      console.log("tak")
+    let index = myData.indexOf(character);
+    if (character.id == idInput) {
+      console.log(`${index} ${character.id} contains the number from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.id} does not contain the number from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 inputs[3].onkeyup = function checkElementLetters() {
-  let DOBInput = inputs[0].value;
+  let DOBInput = inputs[3].value;
   myData.forEach(function(character) {
-    console.log(character.dateOfBirth, DOBInput)
+    let index = myData.indexOf(character);
     if (character.dateOfBirth.includes(DOBInput)) {
-      console.log("tak")
+      console.log(`${index} ${character.dateOfBirth} contains the number from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.dateOfBirth} does not contain the number from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 inputs[5].onkeyup = function checkElementLetters() {
-  let noteInput = inputs[0].value;
+  let noteInput = inputs[5].value;
   myData.forEach(function(character) {
-    console.log(character.note, noteInput)
+    let index = myData.indexOf(character);
     if (character.note.includes(noteInput)) {
-      console.log("tak")
+      console.log(`${index} ${character.note} contains the number from input`)
     } else {
-      console.log('nope')
+      console.log(`${index} ${character.note} does not contain the number from input`);
+      myData.splice(index, 1);
     }
-  })
+  });
+  printTable();
 }
 
 //pagination
